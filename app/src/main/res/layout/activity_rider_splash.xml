@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RiderSplashActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/linlay_logo"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/logo"/>
+        </LinearLayout>
+
+
+        <ImageView
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/linlay_logo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:id="@+id/img_splash_logo"
+            android:adjustViewBounds="true"
+            android:src="@drawable/ic_splash_img"
+         />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_splash_head1"
+            android:layout_below="@id/img_splash_logo"
+            android:text="@string/splash_head_1"
+            android:paddingStart="15dp"
+            android:textColor="@color/textColorBlack"
+            android:textSize="24dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/txt_splash_head2"
+            android:layout_below="@id/txt_splash_head1"
+            android:text="@string/please_enter_mobile"
+            android:textColor="@color/textColorLightGrey"
+            android:layout_marginTop="10dp"
+            android:paddingStart="15dp"
+            android:textSize="14dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/linlay_touchbar"
+            android:orientation="horizontal"
+            android:layout_below="@id/txt_splash_head2"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="15dp">
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:src="@drawable/flag"
+                android:scaleType="fitCenter"
+                android:padding="5dp"
+                android:layout_marginTop="-2dp"
+                android:id="@+id/img_flag" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="+91"
+                android:textSize="18sp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/textColorBlack"/>
+
+            <ImageView
+                android:src="@drawable/ic_down_splash1"
+                android:padding="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/img_arrow" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtline"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/linlay_touchbar"
+            android:background="@drawable/ic_shape_1"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="5dp"
+            android:layout_height="1dp" />
+
+
+    </RelativeLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

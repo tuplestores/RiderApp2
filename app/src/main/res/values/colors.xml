@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="textColorBlack">#363636</color>
+    <color name="textColorLightGrey">#717171</color>
+    <color name="textColorWhite">#ffffff</color>
+    <color name="circleGrey">#e3e4e7</color>
+    <color name="textColorBlue">#3a84ff</color>
+    <color name="editTextLineGray">#e4e9f3</color>
+    <color name="textcolorhead">#545454</color>
+    <color name="textColorHint">#828181</color>
+    <color name="buttonColorGreen">#1fd0a7</color>
+
+</resources>

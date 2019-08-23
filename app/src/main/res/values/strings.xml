@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">RiderApp</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="splash_head_1">Get there with instagaadi</string>
+    <string name="please_enter_mobile">Please enter your mobile number</string>
+    <string name="next">Next</string>
+    <string name="otp1">Please enter the</string>
+    <string name="otp2">verification code</string>
+    <string name="otp3">we sent to your mobile number</string>
+    <string name="code_note_rec">Didn\'t receive the code yet?</string>
+    <string name="resend">Resend</string>
+    <string name="pls_enter_otp">Please enter the verification code  \n we sent to your mobile number</string>
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
+    <string name="organizationcode">Organization Code</string>
+    <string name="complete_reg">Complete Registration</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="rider_home_head">Instagaadi</string>
+    <string name="pls_input_mobile">Please input your mobile number</string>
+</resources>

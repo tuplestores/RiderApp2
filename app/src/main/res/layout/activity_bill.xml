@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="-20dp"
+    tools:context=".BillActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/ic_round_rect_blue_nosize"
+            android:layout_height="400dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginTop="40dp"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Your Bill"
+                    android:textColor="#ffff"
+                    android:textSize="25sp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtBill"
+                    android:layout_width="wrap_content"
+                    android:text="Rs. 999"
+                    android:textColor="#ffff"
+                    android:textSize="20sp"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:background="@drawable/ic_round_cirlce_nosize"
+                    android:layout_height="20dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/ic_line_white_nosize"
+                    android:layout_weight="1"
+                    android:layout_height="20dp" />
+
+                <ImageButton
+                    android:id="@+id/imgveh1"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_sedan"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:background="@drawable/ic_line_white_nosize"
+                    android:layout_weight="1"
+                    android:layout_height="20dp" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:background="@drawable/ic_round_cirlce_nosize"
+                    android:layout_height="20dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtStartPoint"
+                    android:layout_width="wrap_content"
+                    android:textColor="#ffff"
+                    android:text="Start Point"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtvehTye"
+                    android:layout_width="wrap_content"
+                    android:textColor="#ffff"
+                    android:text="Mini"
+                    android:layout_marginStart="50dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtEndpoint"
+                    android:layout_width="wrap_content"
+                    android:textColor="#ffff"
+                    android:text="End point"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:layout_marginStart="60dp"
+                    android:layout_height="wrap_content" />
+
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                card_view:cardBackgroundColor="#ffff"
+                card_view:cardCornerRadius="40dp"
+                android:layout_marginTop="270dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="40dp"
+                card_view:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="40dp"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:text="How was your ride?"
+                        android:textSize="20sp"
+                        android:padding="5dp"
+                        android:textColor="@color/textColorBlack"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="2dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_height="wrap_content">
+                        <ImageButton
+                            android:id="@+id/star1"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:background="@drawable/ic_star"
+                            android:layout_height="wrap_content" />
+                        <ImageButton
+                            android:id="@+id/star2"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/ic_star"
+                            android:layout_height="wrap_content" />
+                        <ImageButton
+                            android:id="@+id/star3"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/ic_star"
+                            android:layout_height="wrap_content" />
+                        <ImageButton
+                            android:id="@+id/star4"
+                            android:layout_width="wrap_content"
+                            android:textSize="20sp"
+                            android:gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:background="@drawable/ic_star"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnDone"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="60dp"
+                        android:layout_marginEnd="60dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Done"
+                        android:textSize="16dp"
+                        android:textColor="@color/textColorWhite"
+                        android:background="@drawable/ic_round_rect_blue_nosize"
+                        android:layout_height="wrap_content" />
+
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="240dp"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rider_image"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="end"
+                android:src="@drawable/rider"
+                app:civ_border_color="#ffff"
+                app:civ_border_width="2dp" />
+
+        </LinearLayout>
+
+
+    </FrameLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

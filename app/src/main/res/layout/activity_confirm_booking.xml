@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ConfirmBookingActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <!-- Area for Google Map-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!--Top Panel-->
+            <LinearLayout
+                android:id="@+id/linlay_top_actionbar"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_back_arrow"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtactionBarTitiel"
+                    android:layout_width="wrap_content"
+                    android:text="Mini, 6min away"
+                    android:textColor="@color/textcolorhead"
+                    android:layout_marginStart="10dp"
+                    android:textSize="18sp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- Place Search Bar-->
+            <LinearLayout
+                android:id="@+id/linlay_searchbarr"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_below="@+id/linlay_top_actionbar"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edt_place_source"
+                    android:background="@drawable/ic_round_rect_white_nosize"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:drawableLeft="@drawable/ic_start_location"
+                    android:drawablePadding="5dp"
+                    android:hint="Enter Pickup Location"
+                    android:textColorHint="@color/textColorHint"
+                    android:layout_marginTop="10dp"/>
+
+
+                <EditText
+                    android:id="@+id/edt_place_dest"
+                    android:background="@drawable/ic_round_rect_white_nosize"
+                    android:layout_width="match_parent"
+                    android:text=""
+                    android:hint="Enter Dropoff Location"
+                    android:textColorHint="@color/textColorHint"
+                    android:layout_height="40dp"
+                    android:drawableLeft="@drawable/ic_drop_location"
+                    android:drawablePadding="5dp"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+
+            <!--White Bottom Panel-->
+
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                card_view:cardBackgroundColor="#ffff"
+                android:layout_alignParentBottom="true"
+                card_view:cardCornerRadius="40dp"
+                android:layout_marginBottom="-40dp"
+                card_view:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/txtEstRate"
+                            android:textSize="18sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/textColorBlue"
+                            android:text="90-99 Rs"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/textcolorhead"
+                            android:textSize="16sp"
+                            android:text="Estimated Rate"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="5dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/txtEstTime"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="14sp"
+                            android:paddingLeft="5dp"
+                            android:layout_marginStart="10dp"
+                            android:gravity="center"
+                            android:minWidth="100dp"
+                            android:textColor="@color/textColorBlue"
+                            android:text="Est. time 30min"
+                            android:background="@drawable/ic_round_rect_grey_stroke_nosize"
+                            android:layout_height="45dp" />
+
+                        <TextView
+                            android:id="@+id/txtEstDist"
+                            android:layout_width="wrap_content"
+                            android:layout_weight="1"
+                            android:textSize="14sp"
+                            android:paddingLeft="5dp"
+                            android:text="Est. dist: 16km"
+                            android:minWidth="100dp"
+                            android:gravity="center"
+                            android:textColor="@color/textColorBlue"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/ic_round_rect_grey_stroke_nosize"
+                            android:layout_height="45dp"/>
+                    </LinearLayout>
+
+                    <Button
+                        android:id="@+id/btnConfirmBooking"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="70dp"
+                        android:layout_marginEnd="70dp"
+                        android:layout_marginTop="20dp"
+                        android:textColor="#ffff"
+                        android:text="confirm booking"
+                        android:background="@drawable/ic_round_rect_blue_nosize"
+                        android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </RelativeLayout>
+
+    </FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

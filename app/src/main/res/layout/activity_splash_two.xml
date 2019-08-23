@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SplashTwoActivity">
+    <ProgressBar
+        android:id="@+id/pgBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:max="100"
+        android:backgroundTint="@color/textColorWhite"
+        android:indeterminateTint="@color/textColorBlue"
+        android:layout_marginTop="-7dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:padding="20dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:layout_marginTop="160dp"
+            android:text="@string/please_enter_mobile"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgFlag"
+                android:src="@drawable/flag"
+                android:layout_width="35dp"
+                android:layout_height="30dp"
+                android:padding="5dp"/>
+
+            <TextView
+                android:id="@+id/txtIsdCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="+91"
+                android:textSize="18sp"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/textColorBlack"/>
+
+            <ImageView
+                android:src="@drawable/ic_down_splash1"
+                android:padding="5dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="5dp"
+                android:id="@+id/img_arrow" />
+            <EditText
+                android:id="@+id/edtMobileNumber"
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:background="@android:color/transparent"
+                android:layout_height="wrap_content" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:background="@drawable/ic_shape_1"
+            android:layout_height="1dp" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_marginStart="70dp"
+            android:layout_marginEnd="70dp"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/textColorWhite"
+            android:text="@string/next"
+            android:textAllCaps="false"
+            android:background="@drawable/ic_round_rect_blue_nosize"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

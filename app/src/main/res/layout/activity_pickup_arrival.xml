@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PickupArrivalActivity">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <!-- Area for Google Map-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <!--Top Panel-->
+            <LinearLayout
+                android:id="@+id/linlay_top_actionbar"
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:padding="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:src="@drawable/ic_back_arrow"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/txtactionBarTitiel"
+                    android:layout_width="wrap_content"
+                    android:text="Mini, 6min away"
+                    android:textColor="@color/textcolorhead"
+                    android:layout_marginStart="10dp"
+                    android:textSize="18sp"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <!-- Place Search Bar-->
+            <LinearLayout
+                android:id="@+id/linlay_searchbarr"
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:padding="10dp"
+                android:layout_below="@+id/linlay_top_actionbar"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/edt_place_source"
+                    android:background="@drawable/ic_round_rect_white_nosize"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:drawableLeft="@drawable/ic_start_location"
+                    android:drawablePadding="5dp"
+                    android:hint="Enter Pickup Location"
+                    android:textColorHint="@color/textColorHint"
+                    android:layout_marginTop="10dp"/>
+
+
+                <EditText
+                    android:id="@+id/edt_place_dest"
+                    android:background="@drawable/ic_round_rect_white_nosize"
+                    android:layout_width="match_parent"
+                    android:text=""
+                    android:hint="Enter Dropoff Location"
+                    android:textColorHint="@color/textColorHint"
+                    android:layout_height="40dp"
+                    android:drawableLeft="@drawable/ic_drop_location"
+                    android:drawablePadding="5dp"
+                    android:layout_marginTop="10dp"/>
+            </LinearLayout>
+
+            <!--White Bottom Panel-->
+
+            <androidx.cardview.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:layout_gravity="center"
+                card_view:cardBackgroundColor="#ffff"
+                android:layout_alignParentBottom="true"
+                card_view:cardCornerRadius="40dp"
+                android:layout_marginBottom="-40dp"
+                card_view:cardElevation="6dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="20dp"
+                        android:orientation="vertical"
+                        android:padding="5dp"
+                        android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:id="@+id/img_rider"
+                                android:layout_width="100dp"
+                                android:background="@drawable/rider"
+                                android:scaleType="fitXY"
+                                android:layout_height="100dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_toRightOf="@id/img_rider"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textSize="14sp"
+                            android:textColor="@color/textColorBlack"
+                            android:id="@+id/txtrider_name1"
+                            android:text="Alex Mathew"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_below="@id/txtrider_name1"
+                            android:layout_toRightOf="@id/img_rider"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="5dp"
+                            android:textSize="12sp"
+                            android:id="@+id/txtrider_name2"
+                            android:text="Alex Mathew"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_below="@id/txtrider_name2"
+                            android:layout_toRightOf="@id/img_rider"
+                            android:layout_marginStart="10dp"
+                            android:layout_marginTop="25dp"
+                            android:textSize="12sp"
+                            android:background="@drawable/ic_round_rect_grey_stroke_noradi"
+                            android:id="@+id/txtrider_name3"
+                            android:text="WXY7WER"
+                            android:padding="5dp"
+                            android:layout_height="wrap_content" />
+
+
+                        <ImageView
+                            android:layout_width="65dp"
+                            android:layout_height="65dp"
+                            android:src="@drawable/ic_sedan"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginEnd="20dp"
+                            android:id="@+id/imgVehType"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:id="@+id/txtVehType"
+                            android:layout_toRightOf="@id/txtrider_name3"
+                            android:layout_alignBaseline="@id/txtrider_name3"
+                            android:layout_below="@id/imgVehType"
+                            android:padding="5dp"
+                            android:gravity="center"
+                            android:textSize="14sp"
+                            android:textColor="@color/textColorBlack"
+                            android:text="Mini"
+                            android:layout_marginStart="110dp"
+                            android:layout_height="wrap_content" />
+
+                        <ImageView
+                            android:id="@+id/imgStar"
+                            android:layout_width="20dp"
+                            android:layout_height="25dp"
+                            android:layout_marginTop="5dp"
+                            android:src="@drawable/ic_star"
+                            android:layout_below="@id/img_rider"/>
+
+                        <TextView
+                            android:id="@+id/txtStar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/imgStar"
+                            android:padding="5dp"
+                            android:src="@drawable/ic_star"
+                            android:textColor="@color/textColorBlack"
+                            android:text="4.5"
+                            android:textSize="16sp"
+                            android:layout_below="@id/img_rider"/>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:orientation="horizontal"
+                        android:padding="5dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/linlay_cancel_button"
+                            android:layout_width="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1"
+                            android:textSize="14sp"
+                            android:paddingLeft="5dp"
+                            android:minWidth="100dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/ic_round_rect_grey_stroke_nosize"
+                            android:layout_height="45dp">
+
+                            <ImageButton
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="5dp"
+                                android:background="@drawable/ic_cancel"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:text="Cancel Ride"
+                                android:textSize="18sp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginStart="5dp"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linlay_call_button"
+                            android:layout_width="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1"
+                            android:textSize="14sp"
+                            android:paddingLeft="5dp"
+                            android:minWidth="100dp"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/ic_round_rect_green_stroke_nosize"
+                            android:layout_height="45dp">
+
+                            <ImageButton
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:layout_marginTop="4dp"
+                                android:background="@drawable/ic_call"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:text="Call Driver"
+                                android:textSize="18sp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginStart="5dp"
+                                android:textColor="@color/textColorWhite"
+                                android:layout_height="wrap_content" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
