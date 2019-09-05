@@ -60,6 +60,17 @@
                 android:padding="10dp"
                 android:layout_below="@+id/linlay_top_actionbar"
                 android:layout_height="wrap_content">
+                <ProgressBar
+                    android:id="@+id/pgBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:max="100"
+                    android:backgroundTint="@color/textColorWhite"
+                    android:indeterminateTint="@color/textColorBlue"
+                    android:layout_marginTop="-7dp"/>
+
 
                 <EditText
                     android:id="@+id/edt_place_source"

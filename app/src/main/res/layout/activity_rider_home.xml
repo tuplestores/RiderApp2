@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".RiderHome">
     <FrameLayout
+        android:id="@+id/frame_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -13,6 +14,7 @@
         <!-- Area for Google Map-->
         <LinearLayout
             android:layout_width="match_parent"
+            android:orientation="vertical"
             android:layout_height="match_parent">
 
             <fragment
@@ -21,6 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 />
+
         </LinearLayout>
 
 
@@ -49,7 +52,9 @@
                     android:layout_marginStart="10dp"
                     android:textSize="22sp"
                     android:layout_height="wrap_content" />
+
             </LinearLayout>
+
 
             <!-- Place Search Bar-->
             <LinearLayout
@@ -59,6 +64,16 @@
                 android:padding="10dp"
                 android:layout_below="@+id/linlay_top_actionbar"
                 android:layout_height="wrap_content">
+                <ProgressBar
+                    android:id="@+id/pgBar"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:max="100"
+                    android:backgroundTint="@color/textColorWhite"
+                    android:indeterminateTint="@color/textColorBlue"
+                    android:layout_marginTop="-7dp"/>
 
                 <EditText
                     android:id="@+id/edt_place_source"
@@ -87,6 +102,7 @@
 
             <!--White Bottom Panel-->
             <LinearLayout
+                android:id="@+id/btnPanelBottom"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#ffff"
@@ -116,7 +132,7 @@
                     android:id="@+id/btnVeh1"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:id="@+id/txtreachtime"
+                        android:id="@+id/txtreachtime1"
                         android:text="10 min"
                         android:padding="2dp"
                         android:textColor="@color/textcolorhead"
