@@ -12,29 +12,15 @@ import com.google.android.gms.maps.model.Marker;
  *
  */public class UtilityFunctions {
 
-    public static String tenant_id;
+
     public static final String SHARED_P = "private_shared_peref";
+    public static Marker vehicleMarker;
 
-    public static Marker riderMarker;
-    public  static Location ridernprevLoc;
-
-    public static Location riderLoc;
-
-    public  static String source;
-    public static String dest;
-    public static String dist;
-    public static String eta;
-    public static LatLng position;
-    public  static LatLng position2;
-    public static String productId;
-    public static String rider_id;
-
-    public  static  String farestart;
-    public  static String  fareend;
+    public  static Location prevLoc;
 
 
 
-    public static boolean setSharedPreferenceRegUser(Context ctx, String rider_id, String org_code){
+    public static boolean setSharedPreferenceRegUser(Context ctx, String rider_id, String tenant_id){
 
         try {
             ctx.getApplicationContext().getSharedPreferences(SHARED_P, 0);
@@ -56,11 +42,11 @@ import com.google.android.gms.maps.model.Marker;
 
         SharedPreferences sharedPreferences =  ctx.getApplicationContext().getSharedPreferences(SHARED_P,0);
 
-        tenant_id = sharedPreferences.getString("tenant_id","");
+       String tenant_id = sharedPreferences.getString("tenant_id","");
 
         if(tenant_id!=null && !tenant_id.equals("") ){
 
-            UtilityFunctions.tenant_id = tenant_id;
+            UserObject.tenant_id = tenant_id;
             return true;
         }
         else{

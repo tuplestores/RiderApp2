@@ -1,5 +1,6 @@
 package com.tuplestores.riderapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -7,6 +8,7 @@ import androidx.core.content.ContextCompat;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 import android.Manifest;
 import android.content.BroadcastReceiver;
@@ -44,6 +46,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.widget.Autocomplete;
@@ -51,6 +55,8 @@ import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.AutocompleteSupportFragment;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.tuplestores.riderapp.api.ApiClient;
 import com.tuplestores.riderapp.api.ApiInterface;
 import com.tuplestores.riderapp.model.ApiResponse;
@@ -60,6 +66,7 @@ import com.tuplestores.riderapp.model.Vehicle;
 import com.tuplestores.riderapp.services.LocationFGService;
 import com.tuplestores.riderapp.utils.Constants;
 import com.tuplestores.riderapp.utils.DirectionsJSONParser;
+import com.tuplestores.riderapp.utils.UserObject;
 import com.tuplestores.riderapp.utils.UtilityFunctions;
 
 import org.json.JSONObject;
@@ -242,8 +249,8 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
         btnRideNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //RideNow
-            }
+               rideNow();
+        }
         });
 
         UtilityFunctions.getAllSharedPrefValues(this);
@@ -254,6 +261,8 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
           .findFragmentById(R.id.map);
          mapFragment.getMapAsync(this);
 
+         //Firebase
+        getFirebaseTocken();
 
         // Check if the user revoked runtime permissions.
         if (!checkPermissions()) {
@@ -291,6 +300,7 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
                     Location loc = intent.getExtras().getParcelable(Constants.EXTRA_TAXI_DISPATCH_LBS_MSG_R);
                     //Zoom to that location in map
                     if (loc != null) {
+                        getAddressFromLocation(loc.getLatitude(), loc.getLongitude());
 
                        setRiderPickUpPinMarkeronMap(loc);
                     }
@@ -313,7 +323,7 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
         btnVeh1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UtilityFunctions.productId = btnVeh1.getTag().toString();
+                UserObject.productId = btnVeh1.getTag().toString();
                 if(btnVeh1.getTag().equals("NC")){
 
                     btnRideNow.setEnabled(false);
@@ -334,7 +344,7 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
         btnVeh2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UtilityFunctions.productId = btnVeh2.getTag().toString();
+                UserObject.productId = btnVeh2.getTag().toString();
                 if(btnVeh2.getTag().equals("NC")){
 
                     btnRideNow.setEnabled(false);
@@ -352,7 +362,7 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
         btnVeh3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UtilityFunctions.productId = btnVeh4.getTag().toString();
+                UserObject.productId = btnVeh4.getTag().toString();
                 if(btnVeh3.getTag().equals("NC")){
 
                     btnRideNow.setEnabled(false);
@@ -369,7 +379,7 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
         btnVeh4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UtilityFunctions.productId = btnVeh4.getTag().toString();
+                UserObject.productId = btnVeh4.getTag().toString();
                 if(btnVeh4.getTag().equals("NC")){
 
                     btnRideNow.setEnabled(false);
@@ -387,7 +397,7 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
         btnVeh5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UtilityFunctions.productId = btnVeh5.getTag().toString();
+                UserObject.productId = btnVeh5.getTag().toString();
                 if(btnVeh5.getTag().equals("NC")){
 
                     btnRideNow.setEnabled(false);
@@ -405,7 +415,7 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
             @Override
             public void onClick(View v) {
 
-                UtilityFunctions.productId = btnVeh6.getTag().toString();
+                UserObject.productId = btnVeh6.getTag().toString();
 
                 if(btnVeh5.getTag().equals("NC")){
 
@@ -478,9 +488,9 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
 
     private void setRiderMarkerOnMap(LatLng latLng) {
 
-        if (UtilityFunctions.riderMarker != null) {
+        if (UserObject.riderMarker != null) {
 
-            UtilityFunctions.riderMarker.setPosition(latLng);
+            UserObject.riderMarker.setPosition(latLng);
 
         }
         else {
@@ -489,7 +499,7 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
              mopt.title("");
              mopt.position(latLng);
              Marker m = mMap.addMarker(mopt);
-             UtilityFunctions.riderMarker = m;
+            UserObject.riderMarker = m;
       }
     }
 
@@ -644,20 +654,16 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
         CameraUpdate center;
         if(loc!=null && mMap!=null){
 
-            if(UtilityFunctions.riderMarker == null){
+            if(UserObject.riderMarker == null){
                 //No marker yet so create
                 MarkerOptions mopt  = new MarkerOptions();
                 mopt.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pickup_man_pin));
                 mopt.title("");
                 mopt.position(new LatLng(loc.getLatitude(), loc.getLongitude()));
                 Marker m = mMap.addMarker(mopt);
-                UtilityFunctions.riderMarker =m;
+                UserObject.riderMarker =m;
 
-
-                //Set angle for marker
-
-                //Rotate Marker
-                UtilityFunctions.riderLoc =loc;
+                UserObject.riderLoc =loc;
                 updateCameraByZoom(zoomed,loc);
                 stopLocationService();//stop location service
                 getNearestVehicles();
@@ -665,7 +671,7 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
             else{
 
               //  moveVehicle(loc);
-                UtilityFunctions.riderLoc =loc;
+                UserObject.riderLoc =loc;
                 // UtilityFunctions.vehicleMarker.setPosition(new LatLng(loc.getLatitude(), loc.getLongitude()));
                // updateCameraByZoom(zoomed,loc);
             }
@@ -708,7 +714,7 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
 
 
 
-        UtilityFunctions.ridernprevLoc = loc;
+        UserObject.ridernprevLoc = loc;
 
 
     }
@@ -934,11 +940,11 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
 
         final ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
-        if(UtilityFunctions.tenant_id==null && UtilityFunctions.tenant_id.equals("")){
+        if(UserObject.tenant_id==null && UserObject.tenant_id.equals("")){
 
             return;
         }
-        Call<List<RiderServ>> call = apiService.getRideServices(UtilityFunctions.tenant_id);
+        Call<List<RiderServ>> call = apiService.getRideServices(UserObject.tenant_id);
 
         call.enqueue(new Callback<List<RiderServ>>() {
             @Override
@@ -990,14 +996,14 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
 
         final ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
-        if(UtilityFunctions.tenant_id==null && UtilityFunctions.tenant_id.equals("")){
+        if(UserObject.tenant_id==null && UserObject.tenant_id.equals("")){
 
             lstVehiclesMain = null;
             return;
         }
-        Call<List<Vehicle>> call = apiService.getNearestVehicles(UtilityFunctions.tenant_id,
-                UtilityFunctions.riderLoc.getLatitude()+"",
-                UtilityFunctions.riderLoc.getLongitude()+"");
+        Call<List<Vehicle>> call = apiService.getNearestVehicles(UserObject.tenant_id,
+                UserObject.riderLoc.getLatitude()+"",
+                UserObject.riderLoc.getLongitude()+"");
 
         call.enqueue(new Callback<List<Vehicle>>() {
             @Override
@@ -1035,7 +1041,7 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
 
         final ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
-        if(UtilityFunctions.tenant_id==null && UtilityFunctions.tenant_id.equals("")){
+        if(UserObject.tenant_id==null && UserObject.tenant_id.equals("")){
 
             lstVehiclesMain = null;
             return;
@@ -1044,9 +1050,9 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
             return;
         }
         inq = true;
-        Call<List<Vehicle>> call = apiService.getNearestVehicles(UtilityFunctions.tenant_id,
-                UtilityFunctions.riderLoc.getLatitude()+"",
-                UtilityFunctions.riderLoc.getLongitude()+"");
+        Call<List<Vehicle>> call = apiService.getNearestVehicles(UserObject.tenant_id,
+                UserObject.riderLoc.getLatitude()+"",
+                UserObject.riderLoc.getLongitude()+"");
 
         call.enqueue(new Callback<List<Vehicle>>() {
             @Override
@@ -1208,8 +1214,8 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
         lstRiderService=null;
         lstVehiclesByService = null;
 
-        UtilityFunctions.riderMarker=null;
-        UtilityFunctions.riderLoc=null;
+        UserObject.riderMarker=null;
+        UserObject.riderLoc=null;
     }
 
     private void showPgBar(boolean isShown){
@@ -1228,6 +1234,10 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
 
         if(mPostion2==null || edt_place_dest.getText().toString().equals("")){
 
+
+            Intent ii = new Intent(this,ConfirmBookingActivity.class);
+            startActivity(ii);
+            finish();
         }
         else{
             //Distance and time estimate from source to destination should be calculated
@@ -1428,12 +1438,75 @@ public class RiderHome extends AppCompatActivity implements OnMapReadyCallback {
     private void startConfirmBooking(){
 
          Intent ii = new Intent(getBaseContext(),ConfirmBookingActivity.class);
-         UtilityFunctions.source = edt_place_source.getText().toString();
-         UtilityFunctions.source = edt_place_dest.getText().toString();
-         UtilityFunctions.position = mPosition;
-         UtilityFunctions.position2 = mPostion2;
-         UtilityFunctions.dist =  DIST;
-         UtilityFunctions.eta = ETA;
+         UserObject.source = edt_place_source.getText().toString();
+         UserObject.source = edt_place_dest.getText().toString();
+         UserObject.position = mPosition;
+         UserObject.position2 = mPostion2;
+         UserObject.dist =  DIST;
+         UserObject.eta = ETA;
+         startActivity(ii);
 
     }
+
+    private void getFirebaseTocken(){
+
+        FirebaseInstanceId.getInstance().getInstanceId()
+                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "getInstanceId failed", task.getException());
+                            return;
+                        }
+
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+                        UserObject.deviceTocken = token;
+
+                        // Log and toast
+                        final ApiInterface apiService =
+                                ApiClient.getClient().create(ApiInterface.class);
+
+
+                        Call<ApiResponse> call = apiService.updateRiderDeviceTocken(UserObject.tenant_id,
+                                UserObject.rider_id,UserObject.deviceTocken);
+
+                        call.enqueue(new Callback<ApiResponse>() {
+                            @Override
+                            public void onResponse(Call<ApiResponse> call, Response<ApiResponse> response) {
+
+                                if(response.body()!=null){
+
+                                    ApiResponse api = response.body();
+                                    if(api.getStatus().trim().equals("S")){
+
+                                        Log.d(TAG, "Tocken==="+"Success");
+                                    }
+                                    else {
+
+                                        Log.d(TAG, "Tocken==="+"Error");
+                                    }
+
+                                }
+                                else  if(response.body()==null){
+                                    Log.d(TAG, "Tocken==="+"Error");
+
+                                }
+                            }//OnResponse
+
+                            @Override
+                            public void onFailure(Call<ApiResponse> call, Throwable t) {
+
+
+                                Log.d(TAG, "Tocken==="+"Error");
+                            }
+                        });
+
+                        Log.d(TAG, "Tocken==="+token);
+
+                    }
+                });
+
+    }
+
 }

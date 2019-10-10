@@ -153,7 +153,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
     }
 
     public void sendResult(Location loc) {
-        Intent intent = new Intent(Constants.ACTION_TAXI_DISPATCH_LBS_R);
+        Intent intent = new Intent(Constants.ACTION_TAXI_DISPATCH_LBS_R);//R means Rider APP
         if (loc != null)
             intent.putExtra(Constants.EXTRA_TAXI_DISPATCH_LBS_MSG_R, loc);
         broadcaster.sendBroadcast(intent);

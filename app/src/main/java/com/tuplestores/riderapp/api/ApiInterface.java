@@ -1,6 +1,7 @@
 package com.tuplestores.riderapp.api;
 
 import com.tuplestores.riderapp.model.ApiResponse;
+import com.tuplestores.riderapp.model.RideRequest;
 import com.tuplestores.riderapp.model.RiderServ;
 import com.tuplestores.riderapp.model.Vehicle;
 
@@ -94,6 +95,22 @@ public interface ApiInterface {
 
                                         @Query("i_estimated_fare_end") String i_estimated_fare_end
                                         );
+
+
+
+
+
+    @GET("dispatchAPI/updateRiderDeviceTocken")
+    Call<ApiResponse> updateRiderDeviceTocken(@Query("i_tenant_id") String i_tenant_id,
+                                              @Query("i_rider_id") String i_rider_id,
+                                              @Query("i_device_token") String i_device_token);
+
+
+    @GET("dispatchAPI/getRideRequest")
+    Call<RideRequest> getRideRequest(@Query("i_tenant_id") String i_tenant_id,
+                                       @Query("i_ride_request_id") String i_ride_request_id);
+
+
 
 
 }

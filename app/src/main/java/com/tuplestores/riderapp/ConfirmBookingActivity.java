@@ -44,6 +44,7 @@ import com.tuplestores.riderapp.api.ApiClient;
 import com.tuplestores.riderapp.api.ApiInterface;
 import com.tuplestores.riderapp.model.ApiResponse;
 import com.tuplestores.riderapp.utils.DirectionsJSONParser;
+import com.tuplestores.riderapp.utils.UserObject;
 import com.tuplestores.riderapp.utils.UtilityFunctions;
 
 import org.json.JSONObject;
@@ -106,21 +107,21 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
             txtEstRate.setText("Calculating...");
         }
 
-        if(UtilityFunctions.eta!=null ){
+        if(UserObject.eta!=null ){
 
-            txtEstTime.setText("Est.Time: "+UtilityFunctions.eta);
+            txtEstTime.setText("Est.Time: "+UserObject.eta);
         }
         else{
             txtEstTime.setText("Est.Time: "+"0");
         }
 
-        if(UtilityFunctions.dist!=null){
+        if(UserObject.dist!=null){
 
             txtEstDist.setText("Est.Time: "+"0");
         }
 
-        edt_place_dest.setText(UtilityFunctions.source==null?"":UtilityFunctions.source);
-        edt_place_dest.setText(UtilityFunctions.dest==null?"":UtilityFunctions.dest);
+        edt_place_dest.setText(UserObject.source==null?"":UserObject.source);
+        edt_place_dest.setText(UserObject.dest==null?"":UserObject.dest);
 
 
 
@@ -197,24 +198,24 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
         Marker m1,m2;
         m1=null;
         boolean both = false;
-        if(UtilityFunctions.position!=null){
+        if(UserObject.position!=null){
 
             MarkerOptions mopt = new MarkerOptions();
             mopt.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pickup_man_pin));
             mopt.title("");
-            mopt.position(UtilityFunctions.position);
+            mopt.position(UserObject.position);
             m1 = mMap.addMarker(mopt);
 
-            UtilityFunctions.riderMarker= m1;
+            UserObject.riderMarker= m1;
 
 
          }
-         if(UtilityFunctions.position2!=null) {
+         if(UserObject.position2!=null) {
 
              MarkerOptions mopt = new MarkerOptions();
              mopt.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pickup_man_pin));
              mopt.title("");
-             mopt.position(UtilityFunctions.position);
+             mopt.position(UserObject.position);
              m2 = mMap.addMarker(mopt);
 
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
@@ -228,7 +229,7 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
              }
 
              //Calculate ETA
-             if(UtilityFunctions.position!=null){
+             if(UserObject.position!=null){
 
                  rideNow();
              }
@@ -237,7 +238,7 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
          else{
 
              CameraPosition cameraPosition = new CameraPosition.Builder()
-                     .target(UtilityFunctions.position)      // Sets the center of the map to Mountain View
+                     .target(UserObject.position)      // Sets the center of the map to Mountain View
                      .zoom(17)                   // Sets the zoom
                      .build();                   // Creates a CameraPosition from the builder
              mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
@@ -275,7 +276,7 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
                     } else {
                         edt_place_source.setText(place.getAddress());
                     }
-                    UtilityFunctions.position = place.getLatLng();
+                    UserObject.position = place.getLatLng();
                     //Zoom to the palce
                     mMap.clear();
                     putRiderMarkerOnMap(place.getLatLng());
@@ -297,7 +298,7 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
                         edt_place_dest.setText(place.getName() + ", " + place.getAddress());
                     } else {
                         edt_place_dest.setText(place.getAddress());
-                        UtilityFunctions.position2 = place.getLatLng();
+                        UserObject.position2 = place.getLatLng();
 
                         //Calculate ETA,DIST,and Fare estimation
                         rideNow();
@@ -319,9 +320,9 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
 
     private void putRiderMarkerOnMap(LatLng latLng) {
 
-        if (UtilityFunctions.riderMarker != null) {
+        if (UserObject.riderMarker != null) {
 
-            UtilityFunctions.riderMarker.setPosition(latLng);
+            UserObject.riderMarker.setPosition(latLng);
 
         }
         else {
@@ -330,14 +331,14 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
             mopt.title("");
             mopt.position(latLng);
             Marker m = mMap.addMarker(mopt);
-            UtilityFunctions.riderMarker = m;
+            UserObject.riderMarker = m;
         }
     }
 
 
     private  void rideNow(){
 
-        if(UtilityFunctions.position2==null || edt_place_dest.getText().toString().equals("")){
+        if(UserObject.position2==null || edt_place_dest.getText().toString().equals("")){
 
 
             return;
@@ -531,8 +532,8 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
             }
 
             //tvDistanceDuration.setText("Distance:"+distance + ", Duration:"+duration);
-            UtilityFunctions.dist = distance;
-            UtilityFunctions.eta = duration;
+            UserObject.dist = distance;
+            UserObject.eta = duration;
             txtEstTime.setText("Est.time: "+duration);
             txtEstDist.setText("Est.dist: "+distance);
 
@@ -552,8 +553,8 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
                 ApiClient.getClient().create(ApiInterface.class);
 
 
-        Call<ApiResponse> call = apiService.getEstimatedFare(UtilityFunctions.tenant_id,
-                                                             UtilityFunctions.productId,
+        Call<ApiResponse> call = apiService.getEstimatedFare(UserObject.tenant_id,
+                                                             UserObject.productId,
                                                              distance);
 
         showHidePg(true);
@@ -573,8 +574,8 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
                         String[]  str = msg.split("_");
                         txtEstRate.setText(str[0]+ " "+str[1]+"-"+str[2]);
 
-                        UtilityFunctions.farestart = str[1];
-                        UtilityFunctions.fareend = str[2];
+                        UserObject.farestart = str[1];
+                        UserObject.fareend = str[2];
 
 
                     }
@@ -610,31 +611,31 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
         final ApiInterface apiService =
                 ApiClient.getClient().create(ApiInterface.class);
 
-        if(UtilityFunctions.eta==null){
-            UtilityFunctions.eta="";
+        if(UserObject.eta==null){
+            UserObject.eta="";
         }
 
-        if(UtilityFunctions.dist==null){
-            UtilityFunctions.dist="";
+        if(UserObject.dist==null){
+            UserObject.dist="";
         }
 
-        if(UtilityFunctions.fareend==null){
-            UtilityFunctions.fareend="";
+        if(UserObject.fareend==null){
+            UserObject.fareend="";
         }
 
-        if(UtilityFunctions.farestart==null){
-            UtilityFunctions.farestart="";
+        if(UserObject.farestart==null){
+            UserObject.farestart="";
         }
 
-        Call<ApiResponse> call = apiService.createRideRequest(UtilityFunctions.tenant_id,UtilityFunctions.productId,
-                UtilityFunctions.rider_id,UtilityFunctions.position.latitude+"",
-                UtilityFunctions.position.longitude+""
+        Call<ApiResponse> call = apiService.createRideRequest(UserObject.tenant_id,UserObject.productId,
+                UserObject.rider_id,UserObject.position.latitude+"",
+                UserObject.position.longitude+""
                 ,edt_place_source.getText().toString(),
 
-                UtilityFunctions.position2.latitude+"",
-                UtilityFunctions.position2.longitude+"",
-                edt_place_dest.getText().toString(),UtilityFunctions.dist,
-                UtilityFunctions.farestart,UtilityFunctions.fareend);
+                UserObject.position2.latitude+"",
+                UserObject.position2.longitude+"",
+                edt_place_dest.getText().toString(),UserObject.dist,
+                UserObject.farestart,UserObject.fareend);
 
         showHidePg(true);
         call.enqueue(new Callback<ApiResponse>() {
@@ -647,7 +648,7 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
                     ApiResponse api = response.body();
                     if(api.getStatus().trim().equals("S")){
 
-                        ShowAlert(getBaseContext(),"Ride request created successfully.","");
+                        ShowAlert(getBaseContext(),"Ride request created successfully.","F");
 
 
                     }
@@ -689,6 +690,7 @@ public class ConfirmBookingActivity extends AppCompatActivity implements OnMapRe
 
                         if(focus.equals("F")) {
 
+                           finish();
 
                         }
                         else if(focus.equals("O")){
